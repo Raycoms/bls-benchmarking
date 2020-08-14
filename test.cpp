@@ -14,7 +14,7 @@ using namespace bls;
 
 void benchSigs() {
     string testName = "Sigining";
-    double numIters = 100;
+    double numIters = 5000;
     PrivateKey sk = AugSchemeMPL::KeyGen(getRandomSeed());
     vector<uint8_t> message1 = sk.GetG1Element().Serialize();
 
@@ -28,7 +28,7 @@ void benchSigs() {
 
 void benchVerification() {
     string testName = "Verification";
-    double numIters = 100;
+    double numIters = 5000;
     PrivateKey sk = AugSchemeMPL::KeyGen(getRandomSeed());
     G1Element pk = sk.GetG1Element();
 
