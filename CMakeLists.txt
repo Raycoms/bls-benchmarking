@@ -3,10 +3,26 @@ project(project)
 set(SOURCE_FILES test.cpp)
 set(PROJECT_NAME project)
 
+# Add path for custom modules
+set(CMAKE_MODULE_PATH
+        ${CMAKE_MODULE_PATH}
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules
+        )
+
+set(STBIN TRUE)
+find_package(gmp)
+if (GMP_FOUND)
+    message(STATUS "Found libgmp")
+    include_directories(${GMP_INCLUDE_DIR})
+    set(ARITH "gmp" CACHE STRING "")
+else()
+    set(ARITH "easy" CACHE STRING "")
+endif()
+
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_compile_options(${PROJECT_NAME}  PUBLIC -Wl,-no_pie)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 
 set(TIMER "CYCLE" CACHE STRING "")
 set(CHECK "off" CACHE STRING "")

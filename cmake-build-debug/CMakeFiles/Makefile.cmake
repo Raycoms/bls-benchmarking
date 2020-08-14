@@ -33,6 +33,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "_deps/relic-src/include/relic_conf.h.in"
   "_deps/relic-src/src/CMakeLists.txt"
   "_deps/relic-src/test/CMakeLists.txt"
+  "../cmake_modules/Findgmp.cmake"
   "/usr/share/cmake-3.17/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.17/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.17/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
