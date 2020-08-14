@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/untitled1.dir/test.cpp.o  -o untitled1   -L/home/ray/CLionProjects/untitled1/bls/build/src  -Wl,-rpath,/home/ray/CLionProjects/untitled1/bls/build/src -lblstmp _deps/relic-build/lib/librelic_s.a -lsodium -lrt 

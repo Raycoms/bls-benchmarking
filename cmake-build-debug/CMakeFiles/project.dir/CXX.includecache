@@ -96,6 +96,14 @@ privatekey.hpp
 util.hpp
 ../bls/src/util.hpp
 
+../bls/src/test-utils.hpp
+chrono
+-
+string
+-
+bls.hpp
+../bls/src/bls.hpp
+
 ../bls/src/util.hpp
 iostream
 -
@@ -117,13 +125,9 @@ relic_test.h
 ../bls/src/relic_test.h
 
 /home/ray/CLionProjects/untitled1/test.cpp
-iostream
--
 bls.hpp
 -
 random
--
-thread
 -
 atomic
 -
@@ -131,7 +135,7 @@ cmath
 -
 set
 -
-libnet.h
+test-utils.hpp
 -
 
 _deps/relic-build/include/relic_conf.h

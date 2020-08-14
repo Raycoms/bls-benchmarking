@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/ray/Documents/IdeaProjects/bls-signatures/build/_deps/relic-subbuild/CMakeFiles/relic-populate"
+		},
+		{
+			"file" : "/home/ray/Documents/IdeaProjects/bls-signatures/build/_deps/relic-subbuild/CMakeFiles/relic-populate.rule"
+		},
+		{
+			"file" : "/home/ray/Documents/IdeaProjects/bls-signatures/build/_deps/relic-subbuild/CMakeFiles/relic-populate-complete.rule"
+		},
+		{
+			"file" : "/home/ray/Documents/IdeaProjects/bls-signatures/build/_deps/relic-subbuild/relic-populate-prefix/src/relic-populate-stamp/relic-populate-install.rule"
+		},
+		{
+			"file" : "/home/ray/Documents/IdeaProjects/bls-signatures/build/_deps/relic-subbuild/relic-populate-prefix/src/relic-populate-stamp/relic-populate-mkdir.rule"
+		},
+		{
+			"file" : "/home/ray/Documents/IdeaProjects/bls-signatures/build/_deps/relic-subbuild/relic-populate-prefix/src/relic-populate-stamp/relic-populate-download.rule"
+		},
+		{
+			"file" : "/home/ray/Documents/IdeaProjects/bls-signatures/build/_deps/relic-subbuild/relic-populate-prefix/src/relic-populate-stamp/relic-populate-update.rule"
+		},
+		{
+			"file" : "/home/ray/Documents/IdeaProjects/bls-signatures/build/_deps/relic-subbuild/relic-populate-prefix/src/relic-populate-stamp/relic-populate-patch.rule"
+		},
+		{
+			"file" : "/home/ray/Documents/IdeaProjects/bls-signatures/build/_deps/relic-subbuild/relic-populate-prefix/src/relic-populate-stamp/relic-populate-configure.rule"
+		},
+		{
+			"file" : "/home/ray/Documents/IdeaProjects/bls-signatures/build/_deps/relic-subbuild/relic-populate-prefix/src/relic-populate-stamp/relic-populate-build.rule"
+		},
+		{
+			"file" : "/home/ray/Documents/IdeaProjects/bls-signatures/build/_deps/relic-subbuild/relic-populate-prefix/src/relic-populate-stamp/relic-populate-test.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"relic-populate"
+		],
+		"name" : "relic-populate"
+	}
+}

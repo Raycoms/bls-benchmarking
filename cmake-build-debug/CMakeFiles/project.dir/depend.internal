@@ -8,6 +8,7 @@ CMakeFiles/project.dir/test.cpp.o
  ../bls/src/hkdf.hpp
  ../bls/src/privatekey.hpp
  ../bls/src/schemes.hpp
+ ../bls/src/test-utils.hpp
  ../bls/src/util.hpp
  /home/ray/CLionProjects/untitled1/test.cpp
  _deps/relic-build/include/relic_conf.h

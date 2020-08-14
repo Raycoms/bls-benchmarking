@@ -37,6 +37,8 @@ BENCH:STRING=100
 //Build with big-endian support
 BIGED:BOOL=OFF
 
+BLSALLOC_SODIUM:STRING=1
+
 //Path to a library.
 BLS_NAME:FILEPATH=/usr/local/lib/libsodium.a
 
@@ -295,6 +297,8 @@ DOXYGEN_DOT_EXECUTABLE:FILEPATH=DOXYGEN_DOT_EXECUTABLE-NOTFOUND
 //Doxygen documentation generation tool (http://www.doxygen.org)
 DOXYGEN_EXECUTABLE:FILEPATH=/usr/bin/doxygen
 
+DSEED:STRING=UDEV
+
 //Width of precomputation table for fixed point methods.
 EB_DEPTH:STRING=4
 
@@ -423,6 +427,12 @@ FP_QNRES:BOOL=OFF
 //Width of window processing for exponentiation methods.
 FP_WIDTH:STRING=4
 
+//Path to a file.
+GMP_INCLUDES:PATH=/usr/include
+
+//Path to a library.
+GMP_LIBRARIES:FILEPATH=/usr/lib/libgmp.so
+
 //Path to a library.
 GMP_NAME:FILEPATH=/usr/lib/libgmp.so
 
@@ -435,11 +445,18 @@ LINK:STRING=
 //Method for hash functions.
 MD_METHD:STRING=SH256
 
+MULTI:STRING=PTHREAD
+
 //Operating system
 OPSYS:STRING=LINUX
 
 //Build with overhead estimation
 OVERH:BOOL=OFF
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
+
+PP_EXT:STRING=LAZYR
 
 //Method for pairing over prime curves.
 PP_METHD:STRING=LAZYR;OATEP
@@ -480,6 +497,8 @@ SIMUL:STRING=
 //Path to a library.
 SODIUM_NAME:FILEPATH=/usr/local/lib/libsodium.a
 
+SODIUM_STATIC:STRING=1
+
 //Build static binaries
 STBIN:BOOL=OFF
 
@@ -513,6 +532,9 @@ blsbench2_SOURCE_DIR:STATIC=/home/ray/CLionProjects/untitled1
 //The directory containing a CMake configuration file for gmp.
 gmp_DIR:PATH=gmp_DIR-NOTFOUND
 
+//Path to a library.
+pkgcfg_lib_sodium_PKG_sodium:FILEPATH=/usr/local/lib/libsodium.so
+
 //Value Computed by CMake
 project_BINARY_DIR:STATIC=/home/ray/CLionProjects/untitled1/cmake-build-debug
 
@@ -520,13 +542,22 @@ project_BINARY_DIR:STATIC=/home/ray/CLionProjects/untitled1/cmake-build-debug
 project_SOURCE_DIR:STATIC=/home/ray/CLionProjects/untitled1
 
 //Dependencies for the target
-relic_LIB_DEPENDS:STATIC=general;rt;
+relic_LIB_DEPENDS:STATIC=general;rt;general;pthread;general;m;
 
 //Dependencies for the target
-relic_s_LIB_DEPENDS:STATIC=general;rt;
+relic_s_LIB_DEPENDS:STATIC=general;rt;general;pthread;general;m;
 
 //The directory containing a CMake configuration file for sodium.
 sodium_DIR:PATH=sodium_DIR-NOTFOUND
+
+//Path to a file.
+sodium_INCLUDE_DIR:PATH=/usr/local/include
+
+//Path to a library.
+sodium_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libsodium.a
+
+//Path to a library.
+sodium_LIBRARY_RELEASE:FILEPATH=/usr/local/lib/libsodium.a
 
 //Value Computed by CMake
 untitled1_BINARY_DIR:STATIC=/home/ray/CLionProjects/untitled1/cmake-build-debug
@@ -625,6 +656,14 @@ CMAKE_GENERATOR_INSTANCE:INTERNAL=
 CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
+//Test CMAKE_HAVE_LIBC_PTHREAD
+CMAKE_HAVE_LIBC_PTHREAD:INTERNAL=
+//Have library pthreads
+CMAKE_HAVE_PTHREADS_CREATE:INTERNAL=
+//Have library pthread
+CMAKE_HAVE_PTHREAD_CREATE:INTERNAL=1
+//Have include pthread.h
+CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/home/ray/CLionProjects/untitled1
@@ -696,14 +735,74 @@ DOXYGEN_DOT_EXECUTABLE-ADVANCED:INTERNAL=1
 DOXYGEN_EXECUTABLE-ADVANCED:INTERNAL=1
 //Details about finding Doxygen
 FIND_PACKAGE_MESSAGE_DETAILS_Doxygen:INTERNAL=[/usr/bin/doxygen][cfound components: doxygen missing components: dot][v1.8.18()]
+//Details about finding Threads
+FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
+//Details about finding gmp
+FIND_PACKAGE_MESSAGE_DETAILS_gmp:INTERNAL=[/usr/include][/usr/lib/libgmp.so][TRUE][v()]
+//Details about finding sodium
+FIND_PACKAGE_MESSAGE_DETAILS_sodium:INTERNAL=[/usr/local/lib/libsodium.a][/usr/local/lib/libsodium.a][/usr/local/include][v()]
+//ADVANCED property for variable: GMP_INCLUDES
+GMP_INCLUDES-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: GMP_LIBRARIES
+GMP_LIBRARIES-ADVANCED:INTERNAL=1
 //Have function backtrace
 HAVE_BACKTRACE:INTERNAL=1
 //Have function backtrace_symbols
 HAVE_BACKTRACE_SYMBOLS:INTERNAL=1
 //Have include execinfo.h
 HAVE_EXECINFO_H:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_nproc
 ProcessorCount_cmd_nproc-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_sysctl
 ProcessorCount_cmd_sysctl-ADVANCED:INTERNAL=1
+__pkg_config_arguments_sodium_PKG:INTERNAL=QUIET;libsodium
+__pkg_config_checked_sodium_PKG:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_sodium_PKG_sodium
+pkgcfg_lib_sodium_PKG_sodium-ADVANCED:INTERNAL=1
+prefix_result:INTERNAL=/usr/lib
+//ADVANCED property for variable: sodium_INCLUDE_DIR
+sodium_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: sodium_LIBRARY_DEBUG
+sodium_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: sodium_LIBRARY_RELEASE
+sodium_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+sodium_PKG_CFLAGS:INTERNAL=
+sodium_PKG_CFLAGS_I:INTERNAL=
+sodium_PKG_CFLAGS_OTHER:INTERNAL=
+sodium_PKG_FOUND:INTERNAL=1
+sodium_PKG_INCLUDEDIR:INTERNAL=/usr/include
+sodium_PKG_INCLUDE_DIRS:INTERNAL=
+sodium_PKG_LDFLAGS:INTERNAL=-lsodium
+sodium_PKG_LDFLAGS_OTHER:INTERNAL=
+sodium_PKG_LIBDIR:INTERNAL=/usr/lib
+sodium_PKG_LIBRARIES:INTERNAL=sodium
+sodium_PKG_LIBRARY_DIRS:INTERNAL=
+sodium_PKG_LIBS:INTERNAL=
+sodium_PKG_LIBS_L:INTERNAL=
+sodium_PKG_LIBS_OTHER:INTERNAL=
+sodium_PKG_LIBS_PATHS:INTERNAL=
+sodium_PKG_MODULE_NAME:INTERNAL=libsodium
+sodium_PKG_PREFIX:INTERNAL=/usr
+sodium_PKG_STATIC_CFLAGS:INTERNAL=
+sodium_PKG_STATIC_CFLAGS_I:INTERNAL=
+sodium_PKG_STATIC_CFLAGS_OTHER:INTERNAL=
+sodium_PKG_STATIC_INCLUDE_DIRS:INTERNAL=
+sodium_PKG_STATIC_LDFLAGS:INTERNAL=-lsodium;-pthread
+sodium_PKG_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+sodium_PKG_STATIC_LIBDIR:INTERNAL=
+sodium_PKG_STATIC_LIBRARIES:INTERNAL=sodium
+sodium_PKG_STATIC_LIBRARY_DIRS:INTERNAL=
+sodium_PKG_STATIC_LIBS:INTERNAL=
+sodium_PKG_STATIC_LIBS_L:INTERNAL=
+sodium_PKG_STATIC_LIBS_OTHER:INTERNAL=
+sodium_PKG_STATIC_LIBS_PATHS:INTERNAL=
+sodium_PKG_VERSION:INTERNAL=1.0.18
+sodium_PKG_libsodium_INCLUDEDIR:INTERNAL=
+sodium_PKG_libsodium_LIBDIR:INTERNAL=
+sodium_PKG_libsodium_PREFIX:INTERNAL=
+sodium_PKG_libsodium_VERSION:INTERNAL=
+//internal change tracking variable
+sodium_USE_STATIC_LIBS_LAST:INTERNAL=TRUE
 

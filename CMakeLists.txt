@@ -1,28 +1,12 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 project(project)
-
-set(CMAKE_CXX_STANDARD 17)
 set(SOURCE_FILES test.cpp)
+set(PROJECT_NAME project)
 
-set(sodium_USE_STATIC_LIBS TRUE)
-find_package(sodium)
-if (SODIUM_FOUND)
-    message(STATUS "Found libsodium")
-    message(STATUS "Sodium include dir = ${sodium_INCLUDE_DIR}")
-    set(BLSALLOC_SODIUM "1" CACHE STRING "")
-    set(SODIUM_STATIC "1" CACHE STRING "")
-    include_directories(${sodium_INCLUDE_DIR})
-endif()
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+target_compile_options(${PROJECT_NAME}  PUBLIC -Wl,-no_pie)
 
-set(STBIN TRUE)
-find_package(gmp)
-if (GMP_FOUND)
-    message(STATUS "Found libgmp")
-    include_directories(${GMP_INCLUDE_DIR})
-    set(ARITH "gmp" CACHE STRING "")
-else()
-    set(ARITH "easy" CACHE STRING "")
-endif()
+set(CMAKE_CXX_STANDARD 14)
 
 set(TIMER "CYCLE" CACHE STRING "")
 set(CHECK "off" CACHE STRING "")
@@ -32,14 +16,7 @@ set(SHLIB "OFF" CACHE STRING "")
 set(MULTI "PTHREAD" CACHE STRING "")
 set(DOCUM "off" CACHE STRING "")
 
-if(EMSCRIPTEN)
-    # emscripten needs arch set to be none since it can't compile assembly
-    set(ARCH "" CACHE STRING "")
-    # emscripten is a 32 bit compiler
-    set(WSIZE 32 CACHE INTEGER "")
-else()
-    set(WSIZE 64 CACHE INTEGER "")
-endif()
+set(FP_PRIME 381 CACHE INTEGER "")
 
 IF (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(DSEED "UDEV" CACHE STRING "")
@@ -67,7 +44,6 @@ set(QUIET 1 CACHE INTEGER "")
 set(PP_EXT "LAZYR" CACHE STRING "")
 set(PP_METHD "LAZYR;OATEP" CACHE STRING "")
 
-# CMake 3.14+
 include(FetchContent)
 
 FetchContent_Declare(
@@ -77,33 +53,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(relic)
 
-file(GLOB HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp)
-source_group("SrcHeaders" FILES ${HEADERS})
+target_include_directories(${PROJECT_NAME}  PUBLIC  ${relic_BINARY_DIR}/include)
+target_include_directories(${PROJECT_NAME}  PUBLIC  ${relic_SOURCE_DIR}/include)
+target_include_directories(${PROJECT_NAME}  PUBLIC  ${GMP_INCLUDES})
+target_include_directories(${PROJECT_NAME}  PUBLIC  ${CMAKE_CURRENT_SOURCE_DIR}/../contrib/catch)
+target_include_directories(${PROJECT_NAME}  PUBLIC  ${INCLUDE_DIRECTORIES})
+target_link_directories(${PROJECT_NAME}  PUBLIC ${relic_SOURCE_DIR}/lib)
 
-include_directories(
-        ${INCLUDE_DIRECTORIES}
-        ${relic_SOURCE_DIR}/include
-        ${relic_BINARY_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/../contrib/catch
-        ${GMP_INCLUDES}
-)
+target_include_directories(${PROJECT_NAME}  PUBLIC bls/src)
+target_link_directories(${PROJECT_NAME}  PUBLIC bls/build/src)
 
-INCLUDE_DIRECTORIES(bls/src)
-LINK_DIRECTORIES(bls/build/src)
-
-set(OPREFIX object_)
-find_library(GMP_NAME NAMES libgmp.a gmp)
-find_library(SODIUM_NAME NAMES libsodium.a sodium)
-find_library(BLS_NAME NAMES libbls.a bls)
-find_library(BLS_TEMP_NAME NAMES libblstmp.a blstmp)
-
-if (GMP_FOUND)
-    list(APPEND LIBRARIES_TO_COMBINE COMMAND mkdir ${OPREFIX}gmp || true && cd ${OPREFIX}gmp &&  ${CMAKE_AR} -x ${GMP_NAME})
-endif()
-if (SODIUM_FOUND)
-    message("SODIUM_FOUND in src/CMakeLists.txt")
-    list(APPEND LIBRARIES_TO_COMBINE COMMAND mkdir ${OPREFIX}sodium || true && cd ${OPREFIX}sodium &&  ${CMAKE_AR} -x ${SODIUM_NAME})
-endif()
-
-add_executable(project ${SOURCE_FILES})
-TARGET_LINK_LIBRARIES(project blstmp relic_s sodium)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} blstmp relic_s pthread sodium gmp)

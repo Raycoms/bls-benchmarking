@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O3 -DNDEBUG  -shared  -o blspy.cpython-38-x86_64-linux-gnu.so CMakeFiles/blspy.dir/pythonbindings.cpp.o  -Wl,-rpath,/usr/local/lib -flto ../src/libblstmp.a ../_deps/relic-build/lib/librelic_s.a /usr/local/lib/libsodium.a /usr/local/lib/libgmp.so -lrt -lpthread -lm 

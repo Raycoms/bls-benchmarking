@@ -1,116 +1,122 @@
-#include <iostream>
 #include <bls.hpp>
 #include <random>
-#include <thread>
 #include <atomic>
 #include <cmath>
 #include <set>
-#include <libnet.h>
+#include <test-utils.hpp>
+
+using std::string;
+using std::vector;
+using std::cout;
+using std::endl;
 
 using namespace bls;
-using namespace std;
 
-int main() {
-    vector<PrivateKey> vec;
+void benchSigs() {
+    string testName = "Sigining";
+    double numIters = 100;
+    PrivateKey sk = AugSchemeMPL::KeyGen(getRandomSeed());
+    vector<uint8_t> message1 = sk.GetG1Element().Serialize();
 
-    int total = 2000;
-    for (size_t id = 0; id < total; id ++) {
-        vector<uint8_t> seed = {0, static_cast<uint8_t>(id), 6, 244, 24, 199, 1, 25, 52, 88, 192,
-                          19, 18, 12, 89, 6, static_cast<uint8_t>(id), 18, 102, 58, 209,
-                          82, 12, 62, 89, 110, 182, 9, 44, 20, static_cast<uint8_t>(id), 22};
+    auto start = startStopwatch();
 
-        vec.emplace_back(PrivateKey::FromByteVector(seed, true));
+    for (size_t i = 0; i < numIters; i++) {
+        AugSchemeMPL::Sign(sk, message1);
+    }
+    endStopwatch(testName, start, numIters);
+}
+
+void benchVerification() {
+    string testName = "Verification";
+    double numIters = 100;
+    PrivateKey sk = AugSchemeMPL::KeyGen(getRandomSeed());
+    G1Element pk = sk.GetG1Element();
+
+    std::vector<G2Element> sigs;
+
+    for (size_t i = 0; i < numIters; i++) {
+        uint8_t message[4];
+        Util::IntToFourBytes(message, i);
+        vector<uint8_t> messageBytes(message, message + 4);
+        sigs.push_back(AugSchemeMPL::Sign(sk, messageBytes));
     }
 
-    vector<uint8_t> msg = {100, 2, 254, 88, 90, 45, 23};
-    uint8_t hash[bls::BLS::MESSAGE_HASH_LEN];
-    bls::Util::Hash256(hash, msg.data(), msg.size());
+    auto start = startStopwatch();
+    for (size_t i = 0; i < numIters; i++) {
+        uint8_t message[4];
+        Util::IntToFourBytes(message, i);
+        vector<uint8_t> messageBytes(message, message + 4);
+        bool ok = AugSchemeMPL::Verify(pk, messageBytes, sigs[i]);
+        ASSERT(ok);
+    }
+    endStopwatch(testName, start, numIters);
+}
 
-    vector<G2Element> sigVec;
-    vector<G1Element> pubVec;
+void benchBatchVerification() {
+    double numIters = 100;
 
-    sigVec.reserve(vec.size());
+    vector<G2Element> sigs;
+    vector<G1Element> pks;
+    vector<vector<uint8_t>> ms;
 
-    for (const PrivateKey& key : vec) {
-        sigVec.emplace_back(PopSchemeMPL::Sign(key, msg));
-        pubVec.emplace_back(key.GetG1Element());
+    for (size_t i = 0; i < numIters; i++) {
+        uint8_t message[4];
+        Util::IntToFourBytes(message, i);
+        vector<uint8_t> messageBytes(message, message + 4);
+        PrivateKey sk = AugSchemeMPL::KeyGen(getRandomSeed());
+        G1Element pk = sk.GetG1Element();
+        sigs.push_back(AugSchemeMPL::Sign(sk, messageBytes));
+        pks.push_back(pk);
+        ms.push_back(messageBytes);
     }
 
-    struct timeval timeStart,
-            timeEnd;
-    gettimeofday(&timeStart, NULL);
+    auto start = startStopwatch();
+    G2Element aggSig = AugSchemeMPL::Aggregate(sigs);
+    endStopwatch("Aggregation", start, numIters);
 
-    bls::G2Element sig = PopSchemeMPL::Aggregate(sigVec);
+    start = startStopwatch();
+    bool ok = AugSchemeMPL::AggregateVerify(pks, ms, aggSig);
+    ASSERT(ok);
+    endStopwatch("Batch verification", start, numIters);
+}
 
-    gettimeofday(&timeEnd, NULL);
+void benchFastAggregateVerification() {
+    double numIters = 100;
 
-    std::cout << "This aggregating slow piece of code took "
-              << ((timeEnd.tv_sec - timeStart.tv_sec) * 1000000 + timeEnd.tv_usec - timeStart.tv_usec)
-              << " us to execute."
-              << std::endl;
+    vector<G2Element> sigs;
+    vector<G1Element> pks;
+    vector<uint8_t> message = {1, 2, 3, 4, 5, 6, 7, 8};
+    vector<G2Element> pops;
 
-
-    vector<G1Element> pubVec1;
-    vector<G1Element> pubVec2;
-
-    for (int i = 0; i < total/2; i++) {
-        pubVec1.emplace_back(vec[i].GetG1Element());
-        pubVec2.emplace_back(vec[total/2+i].GetG1Element());
+    for (size_t i = 0; i < numIters; i++) {
+        PrivateKey sk = PopSchemeMPL::KeyGen(getRandomSeed());
+        G1Element pk = sk.GetG1Element();
+        sigs.push_back(PopSchemeMPL::Sign(sk, message));
+        pops.push_back(PopSchemeMPL::PopProve(sk));
+        pks.push_back(pk);
     }
 
-    gettimeofday(&timeStart, NULL);
+    auto start = startStopwatch();
+    G2Element aggSig = PopSchemeMPL::Aggregate(sigs);
+    endStopwatch("PopScheme Aggregation", start, numIters);
 
-    bls::G1Element pub1 = pubVec[0];
 
-    // New way of aggregating
-    for (int i = 1; i < pubVec.size(); i++) {
-        pub1 += pubVec1[i];
+    start = startStopwatch();
+    for (size_t i = 0; i < numIters; i++) {
+        bool ok = PopSchemeMPL::PopVerify(pks[i], pops[i]);
+        ASSERT(ok);
     }
+    endStopwatch("PopScheme Proofs verification", start, numIters);
 
-    gettimeofday(&timeEnd, NULL);
+    start = startStopwatch();
+    bool ok = PopSchemeMPL::FastAggregateVerify(pks, message, aggSig);
+    ASSERT(ok);
+    endStopwatch("PopScheme verification", start, numIters);
+}
 
-    std::cout << "This aggregation1 slow piece of code took "
-              << ((timeEnd.tv_sec - timeStart.tv_sec) * 1000000 + timeEnd.tv_usec - timeStart.tv_usec)
-              << " us to execute."
-              << std::endl;
-
-    gettimeofday(&timeStart, NULL);
-
-    bls::G1Element pub2 = pubVec2[0];
-
-    // New way of aggregating
-    for (int i = 1; i < pubVec2.size(); i++) {
-        pub1 += pubVec2[i];
-    }
-
-    gettimeofday(&timeEnd, NULL);
-
-    std::cout << "This aggregation2 slow piece of code took "
-              << ((timeEnd.tv_sec - timeStart.tv_sec) * 1000000 + timeEnd.tv_usec - timeStart.tv_usec)
-              << " us to execute."
-              << std::endl;
-
-
-    gettimeofday(&timeStart, NULL);
-
-    bls::G1Element pub = pub1 + pub2;
-
-    gettimeofday(&timeEnd, NULL);
-
-    std::cout << "This aggregation3 slow piece of code took "
-              << ((timeEnd.tv_sec - timeStart.tv_sec) * 1000000 + timeEnd.tv_usec - timeStart.tv_usec)
-              << " us to execute."
-              << std::endl;
-
-    gettimeofday(&timeStart, NULL);
-
-    cout << PopSchemeMPL::Verify(pub, msg, sig) << endl;
-
-
-    gettimeofday(&timeEnd, NULL);
-
-    std::cout << "This th computing slow piece of code took "
-              << ((timeEnd.tv_sec - timeStart.tv_sec) * 1000000 + timeEnd.tv_usec - timeStart.tv_usec)
-              << " us to execute."
-              << std::endl;
+int main(int argc, char* argv[]) {
+    benchSigs();
+    benchVerification();
+    benchBatchVerification();
+    benchFastAggregateVerification();
 }

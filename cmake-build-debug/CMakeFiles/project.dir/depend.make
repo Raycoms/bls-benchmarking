@@ -7,6 +7,7 @@ CMakeFiles/project.dir/test.cpp.o: ../bls/src/hdkeys.hpp
 CMakeFiles/project.dir/test.cpp.o: ../bls/src/hkdf.hpp
 CMakeFiles/project.dir/test.cpp.o: ../bls/src/privatekey.hpp
 CMakeFiles/project.dir/test.cpp.o: ../bls/src/schemes.hpp
+CMakeFiles/project.dir/test.cpp.o: ../bls/src/test-utils.hpp
 CMakeFiles/project.dir/test.cpp.o: ../bls/src/util.hpp
 CMakeFiles/project.dir/test.cpp.o: ../test.cpp
 CMakeFiles/project.dir/test.cpp.o: _deps/relic-build/include/relic_conf.h

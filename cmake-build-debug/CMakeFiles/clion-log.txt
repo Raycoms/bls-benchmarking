@@ -1,4 +1,20 @@
 /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/ray/CLionProjects/untitled1
+CMake Warning (dev) at CMakeLists.txt:19 (set):
+  implicitly converting 'INTEGER' to 'STRING' type.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at CMakeLists.txt:40 (set):
+  implicitly converting 'INTEGER' to 'STRING' type.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at CMakeLists.txt:41 (set):
+  implicitly converting 'INTEGER' to 'STRING' type.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at CMakeLists.txt:42 (set):
+  implicitly converting 'INTEGER' to 'STRING' type.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
 
 -- Configuring RELIC 0.5.0...
 
@@ -447,7 +463,7 @@
    SEED=WCGR      Use Windows' CryptGenRandom. (recommended)
 
 -- Configured operating system: LINUX
--- Compiler flags: -pipe -std=c99 -m64 -Wall   -O2 -funroll-loops -fomit-frame-pointer
+-- Compiler flags: -pipe -std=c99 -m64 -Wall   -O2 -funroll-loops -fomit-frame-pointer -pthread
 -- Linker flags: -L/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/src/low/easy/ 
 -- Configured /home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/include/relic_conf.h.in
 -- Configured /home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/doc/relic.doxygen.in
