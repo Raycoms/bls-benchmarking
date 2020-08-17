@@ -1,1 +1,0 @@
-/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/runbench.dir/test-bench.cpp.o  -o runbench  -Wl,-rpath,/usr/local/lib libblstmp.a ../_deps/relic-build/lib/librelic_s.a /usr/local/lib/libsodium.a /usr/local/lib/libgmp.so -lrt -lpthread -lm 

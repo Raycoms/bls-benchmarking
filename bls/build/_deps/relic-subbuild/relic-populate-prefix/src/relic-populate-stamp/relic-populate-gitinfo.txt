@@ -1,3 +1,0 @@
-repository='https://github.com/relic-toolkit/relic.git'
-module=''
-tag='origin'
