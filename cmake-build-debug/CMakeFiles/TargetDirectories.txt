@@ -5,6 +5,17 @@
 /home/ray/CLionProjects/untitled1/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/ray/CLionProjects/untitled1/cmake-build-debug/CMakeFiles/install/strip.dir
 /home/ray/CLionProjects/untitled1/cmake-build-debug/CMakeFiles/project.dir
+/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/CMakeFiles/install/local.dir
+/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/CMakeFiles/install.dir
+/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/CMakeFiles/list_install_components.dir
+/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/CMakeFiles/rebuild_cache.dir
+/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/CMakeFiles/edit_cache.dir
+/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/CMakeFiles/runbench.dir
+/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/CMakeFiles/runtest.dir
+/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/CMakeFiles/combined_custom.dir
+/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/CMakeFiles/blstmp.dir
+/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/CMakeFiles/install/strip.dir
+/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/CMakeFiles/bls.dir
 /home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/CMakeFiles/install/strip.dir
 /home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/CMakeFiles/install/local.dir
 /home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/CMakeFiles/install.dir

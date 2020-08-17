@@ -5,7 +5,7 @@
 		<Option title="project"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\cmake-build-debug\;CMake Files\cmake-build-debug\_deps\;CMake Files\cmake-build-debug\_deps\relic-src\;CMake Files\cmake-build-debug\_deps\relic-src\cmake\;CMake Files\cmake-build-debug\_deps\relic-src\include\;CMake Files\cmake-build-debug\_deps\relic-src\doc\;CMake Files\cmake-build-debug\_deps\relic-src\src\;CMake Files\cmake-build-debug\_deps\relic-src\test\;CMake Files\cmake-build-debug\_deps\relic-src\bench\;CMake Files\cmake_modules\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake-build-debug\;CMake Files\cmake-build-debug\_deps\;CMake Files\cmake-build-debug\_deps\relic-src\;CMake Files\cmake-build-debug\_deps\relic-src\cmake\;CMake Files\cmake-build-debug\_deps\relic-src\include\;CMake Files\cmake-build-debug\_deps\relic-src\doc\;CMake Files\cmake-build-debug\_deps\relic-src\src\;CMake Files\cmake-build-debug\_deps\relic-src\test\;CMake Files\cmake-build-debug\_deps\relic-src\bench\;CMake Files\cmake_modules\;CMake Files\bls\;CMake Files\bls\src\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/ray/CLionProjects/untitled1/cmake-build-debug"/>
@@ -84,9 +84,11 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/include"/>
+					<Add option="-DSODIUM_STATIC"/>
 					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/include"/>
 					<Add directory="/home/ray/CLionProjects/untitled1/../contrib/catch"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/bls/contrib/catch"/>
 					<Add directory="/home/ray/CLionProjects/untitled1/bls/src"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/x86_64-pc-linux-gnu"/>
@@ -110,9 +112,11 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/include"/>
+					<Add option="-DSODIUM_STATIC"/>
 					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/include"/>
 					<Add directory="/home/ray/CLionProjects/untitled1/../contrib/catch"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/bls/contrib/catch"/>
 					<Add directory="/home/ray/CLionProjects/untitled1/bls/src"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/x86_64-pc-linux-gnu"/>
@@ -127,6 +131,224 @@
 					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="runbench">
+				<Option output="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/runbench" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DSODIUM_STATIC"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/bls/src/../contrib/catch"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 runbench"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="runbench/fast">
+				<Option output="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/runbench" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DSODIUM_STATIC"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/bls/src/../contrib/catch"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 runbench/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="runtest">
+				<Option output="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/runtest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DSODIUM_STATIC"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/bls/src/../contrib/catch"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 runtest"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="runtest/fast">
+				<Option output="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/runtest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DSODIUM_STATIC"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/bls/src/../contrib/catch"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 runtest/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="combined_custom">
+				<Option working_dir="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 combined_custom"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="blstmp">
+				<Option output="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/libblstmp.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBLSALLOC_SODIUM=1"/>
+					<Add option="-DSODIUM_STATIC=1"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/bls/src/../contrib/catch"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 blstmp"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="blstmp/fast">
+				<Option output="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/libblstmp.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBLSALLOC_SODIUM=1"/>
+					<Add option="-DSODIUM_STATIC=1"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/bls/src/../contrib/catch"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 blstmp/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bls">
+				<Option output="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/libbls.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/bls/src/../contrib/catch"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 bls"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bls/fast">
+				<Option output="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/libbls.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-build/include"/>
+					<Add directory="/home/ray/CLionProjects/untitled1/bls/src/../contrib/catch"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/../../../../include/c++/10.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 bls/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/ray/CLionProjects/untitled1/cmake-build-debug/bls/src/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="doc">
@@ -2202,6 +2424,49 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/bls.cpp">
+			<Option target="blstmp"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/bls.hpp">
+			<Option target="blstmp"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/elements.cpp">
+			<Option target="blstmp"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/elements.hpp">
+			<Option target="blstmp"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/hdkeys.hpp">
+			<Option target="blstmp"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/hkdf.hpp">
+			<Option target="blstmp"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/privatekey.cpp">
+			<Option target="blstmp"/>
+			<Option target="bls"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/privatekey.hpp">
+			<Option target="blstmp"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/schemes.cpp">
+			<Option target="blstmp"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/schemes.hpp">
+			<Option target="blstmp"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/test-bench.cpp">
+			<Option target="runbench"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/test-utils.hpp">
+			<Option target="blstmp"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/test.cpp">
+			<Option target="runtest"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/util.hpp">
+			<Option target="blstmp"/>
+		</Unit>
 		<Unit filename="/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/bench/bench_bn.c">
 			<Option target="bench_bn"/>
 		</Unit>
@@ -3340,6 +3605,12 @@
 		</Unit>
 		<Unit filename="/home/ray/CLionProjects/untitled1/cmake_modules/Findgmp.cmake">
 			<Option virtualFolder="CMake Files\cmake_modules\"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/cmake_modules/Findsodium.cmake">
+			<Option virtualFolder="CMake Files\cmake_modules\"/>
+		</Unit>
+		<Unit filename="/home/ray/CLionProjects/untitled1/bls/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\bls\src\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

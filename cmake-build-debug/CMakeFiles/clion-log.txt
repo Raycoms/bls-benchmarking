@@ -1,19 +1,21 @@
 /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/ray/CLionProjects/untitled1
+-- Found libsodium
+-- Sodium include dir = /usr/local/include
 GMP_INCLUDES=/usr/include
 -- Found libgmp
-CMake Warning (dev) at CMakeLists.txt:35 (set):
+CMake Warning (dev) at CMakeLists.txt:49 (set):
   implicitly converting 'INTEGER' to 'STRING' type.
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
-CMake Warning (dev) at CMakeLists.txt:56 (set):
+CMake Warning (dev) at CMakeLists.txt:70 (set):
   implicitly converting 'INTEGER' to 'STRING' type.
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
-CMake Warning (dev) at CMakeLists.txt:57 (set):
+CMake Warning (dev) at CMakeLists.txt:71 (set):
   implicitly converting 'INTEGER' to 'STRING' type.
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
-CMake Warning (dev) at CMakeLists.txt:58 (set):
+CMake Warning (dev) at CMakeLists.txt:72 (set):
   implicitly converting 'INTEGER' to 'STRING' type.
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
@@ -469,6 +471,7 @@ This warning is for project developers.  Use -Wno-dev to suppress it.
 -- Linker flags: -L/home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/src/low/easy/  -static
 -- Configured /home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/include/relic_conf.h.in
 -- Configured /home/ray/CLionProjects/untitled1/cmake-build-debug/_deps/relic-src/doc/relic.doxygen.in
+SODIUM_FOUND in src/CMakeLists.txt
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/ray/CLionProjects/untitled1/cmake-build-debug

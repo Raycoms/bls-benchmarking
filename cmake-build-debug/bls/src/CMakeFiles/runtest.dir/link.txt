@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/runtest.dir/test.cpp.o -o runtest  libblstmp.a ../../_deps/relic-build/lib/librelic_s.a /usr/local/lib/libsodium.a -lrt -lpthread -lm 

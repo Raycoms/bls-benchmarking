@@ -2,3 +2,5 @@
 .idea/
 
 cmake-build-debug/_deps/
+build/
+bls/build/

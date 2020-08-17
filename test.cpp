@@ -53,7 +53,7 @@ void benchVerification() {
 }
 
 void benchBatchVerification() {
-    double numIters = 100;
+    double numIters = 5000;
 
     vector<G2Element> sigs;
     vector<G1Element> pks;
@@ -81,7 +81,7 @@ void benchBatchVerification() {
 }
 
 void benchFastAggregateVerification() {
-    double numIters = 100;
+    double numIters = 5000;
 
     vector<G2Element> sigs;
     vector<G1Element> pks;

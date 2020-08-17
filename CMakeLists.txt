@@ -1,4 +1,10 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+set (CMAKE_CXX_STANDARD 11)
+
+IF(NOT CMAKE_BUILD_TYPE)
+    SET(CMAKE_BUILD_TYPE "RELEASE")
+ENDIF()
+
 project(project)
 set(SOURCE_FILES test.cpp)
 set(PROJECT_NAME project)
@@ -8,6 +14,16 @@ set(CMAKE_MODULE_PATH
         ${CMAKE_MODULE_PATH}
         ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules
         )
+
+set(sodium_USE_STATIC_LIBS TRUE)
+find_package(sodium)
+if (SODIUM_FOUND)
+    message(STATUS "Found libsodium")
+    message(STATUS "Sodium include dir = ${sodium_INCLUDE_DIR}")
+    set(BLSALLOC_SODIUM "1" CACHE STRING "")
+    set(SODIUM_STATIC "1" CACHE STRING "")
+    include_directories(${sodium_INCLUDE_DIR})
+endif()
 
 set(STBIN TRUE)
 find_package(gmp)
@@ -21,8 +37,6 @@ endif()
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_compile_options(${PROJECT_NAME}  PUBLIC -Wl,-no_pie)
-
-set(CMAKE_CXX_STANDARD 11)
 
 set(TIMER "CYCLE" CACHE STRING "")
 set(CHECK "off" CACHE STRING "")
@@ -60,6 +74,8 @@ set(QUIET 1 CACHE INTEGER "")
 set(PP_EXT "LAZYR" CACHE STRING "")
 set(PP_METHD "LAZYR;OATEP" CACHE STRING "")
 
+add_subdirectory(bls/src)
+
 include(FetchContent)
 
 FetchContent_Declare(
@@ -69,14 +85,22 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(relic)
 
+include_directories(
+        ${INCLUDE_DIRECTORIES}
+        ${relic_SOURCE_DIR}/include
+        ${relic_BINARY_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/../contrib/catch
+        ${GMP_INCLUDES}
+)
+
 target_include_directories(${PROJECT_NAME}  PUBLIC  ${relic_BINARY_DIR}/include)
 target_include_directories(${PROJECT_NAME}  PUBLIC  ${relic_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME}  PUBLIC  ${GMP_INCLUDES})
-target_include_directories(${PROJECT_NAME}  PUBLIC  ${CMAKE_CURRENT_SOURCE_DIR}/../contrib/catch)
+target_include_directories(${PROJECT_NAME}  PUBLIC  ${CMAKE_CURRENT_SOURCE_DIR}/bls/contrib/catch)
 target_include_directories(${PROJECT_NAME}  PUBLIC  ${INCLUDE_DIRECTORIES})
-target_link_directories(${PROJECT_NAME}  PUBLIC ${relic_SOURCE_DIR}/lib)
+# target_link_directories(${PROJECT_NAME}  PUBLIC ${relic_SOURCE_DIR}/lib)
 
 target_include_directories(${PROJECT_NAME}  PUBLIC bls/src)
-target_link_directories(${PROJECT_NAME}  PUBLIC bls/build/src)
+# target_link_directories(${PROJECT_NAME}  PUBLIC bls/build/src)
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} blstmp relic_s pthread sodium gmp)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} PRIVATE blstmp relic_s pthread gmp sodium)
