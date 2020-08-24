@@ -1,5 +1,5 @@
 
-// Copyright 2018 Chia Network Inc
+// Copyright 2020 Chia Network Inc
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -274,6 +274,9 @@ TEST_CASE("Chia test vectors") {
             "c2e7790aeb455e27beae91d64e077c70b5506dea3");
 
         REQUIRE(BasicSchemeMPL::AggregateVerify({pk1, pk2}, {message1, message2}, aggSig1));
+        REQUIRE(!BasicSchemeMPL::AggregateVerify({pk1, pk2}, {message1, message2}, sig1));
+        REQUIRE(!BasicSchemeMPL::Verify(pk1, message1, sig2));
+        REQUIRE(!BasicSchemeMPL::Verify(pk1, message2, sig1));
 
         vector<uint8_t> message3 = {1, 2, 3};
         vector<uint8_t> message4 = {1, 2, 3, 4};
@@ -327,6 +330,20 @@ TEST_CASE("Chia test vectors") {
             "a1d5360dcb418d33b29b90b912b4accde535cf0e52caf467a005dc632d9f7af44b6c4e9acd4"
             "6eac218b28cdb07a3e3bc087df1cd1e3213aa4e11322a3ff3847bbba0b2fd19ddc25ca964871"
             "997b9bceeab37a4c2565876da19382ea32a962200");
+    }
+    SECTION("Chia test vector 3 (PoP)") {
+        vector<uint8_t> message1 = {1, 2, 3, 40, 50};
+
+        vector<uint8_t> seed1(32, 0x04);  // All 4s
+
+        PrivateKey sk1 = PopSchemeMPL::KeyGen(seed1);
+
+        G2Element pop = PopSchemeMPL::PopProve(sk1);
+        REQUIRE(PopSchemeMPL::PopVerify(sk1.GetG1Element(), pop));
+
+        REQUIRE(Util::HexStr(pop.Serialize()) == "84f709159435f0dc73b3e8bf6c78d85282d19231555a8ee3b6e2573aaf66872d9203fefa1ef"
+                                                 "700e34e7c3f3fb28210100558c6871c53f1ef6055b9f06b0d1abe22ad584ad3b957f3018a8f5"
+                                                 "8227c6c716b1e15791459850f2289168fa0cf9115");
     }
 }
 
@@ -454,11 +471,11 @@ TEST_CASE("Signature tests")
     SECTION("Should sign with the zero key") {
         vector<uint8_t> sk0(32, 0);
         PrivateKey sk = PrivateKey::FromByteVector(sk0);
-        REQUIRE(sk.GetG1Element() == G1Element());  // Infinity
-        REQUIRE(sk.GetG2Element() == G2Element());  // Infinity
-        REQUIRE(BasicSchemeMPL::Sign(sk, {1, 2, 3}) == G2Element());
-        REQUIRE(AugSchemeMPL::Sign(sk, {1, 2, 3}) == G2Element());
-        REQUIRE(PopSchemeMPL::Sign(sk, {1, 2, 3}) == G2Element());
+        REQUIRE(sk.GetG1Element() == G1Element::Infinity());  // Infinity
+        REQUIRE(sk.GetG2Element() == G2Element::Infinity());  // Infinity
+        REQUIRE(BasicSchemeMPL::Sign(sk, {1, 2, 3}) == G2Element::Infinity());
+        REQUIRE(AugSchemeMPL::Sign(sk, {1, 2, 3}) == G2Element::Infinity());
+        REQUIRE(PopSchemeMPL::Sign(sk, {1, 2, 3}) == G2Element::Infinity());
     }
 
     SECTION("Should use equality operators")
@@ -505,18 +522,16 @@ TEST_CASE("Signature tests")
         PrivateKey sk2 = PrivateKey::FromBytes(skData);
         REQUIRE(sk1 == sk2);
 
-        uint8_t pkData[G1Element::SIZE];
-        pk1.Serialize(pkData);
+        auto pkData = pk1.Serialize();
 
-        G1Element pk2 = G1Element::FromBytes(pkData);
+        G1Element pk2 = G1Element::FromBytes(pkData.data());
         REQUIRE(pk1 == pk2);
 
         G2Element sig1 = BasicSchemeMPL::Sign(sk1, message1);
 
-        uint8_t sigData[G2Element::SIZE];
-        sig1.Serialize(sigData);
+        auto sigData = sig1.Serialize();
 
-        G2Element sig2 = G2Element::FromBytes(sigData);
+        G2Element sig2 = G2Element::FromBytes(sigData.data());
         REQUIRE(sig1 == sig2);
 
         REQUIRE(BasicSchemeMPL::Verify(pk2, message1, sig2));
@@ -729,7 +744,7 @@ TEST_CASE("Advanced") {
         cout << Util::HexStr(signatureBytes) << endl;  // 96 bytes
 
         // Takes array of 32 bytes
-        sk = PrivateKey::FromByteVector(skBytes);
+        PrivateKey skc = PrivateKey::FromByteVector(skBytes);
 
         // Takes array of 48 bytes
         pk = G1Element::FromByteVector(pkBytes);

@@ -98,6 +98,7 @@ project_EXTERNAL_OBJECTS =
 
 project: CMakeFiles/project.dir/test.cpp.o
 project: CMakeFiles/project.dir/build.make
+project: /usr/lib/libgmp.so
 project: bls/src/libblstmp.a
 project: _deps/relic-build/lib/librelic_s.a
 project: /usr/local/lib/libsodium.a

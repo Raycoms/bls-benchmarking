@@ -103,4 +103,4 @@ target_include_directories(${PROJECT_NAME}  PUBLIC  ${INCLUDE_DIRECTORIES})
 target_include_directories(${PROJECT_NAME}  PUBLIC bls/src)
 # target_link_directories(${PROJECT_NAME}  PUBLIC bls/build/src)
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} PRIVATE blstmp relic_s pthread gmp sodium)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} PRIVATE ${GMP_LIBRARIES} ${GMPXX_LIBRARIES} blstmp relic_s pthread sodium)
