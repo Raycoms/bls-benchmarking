@@ -16,7 +16,7 @@ using namespace bls;
 int main(int argc, char* argv[]) {
     vector<PrivateKey> vec;
 
-    int total = 100;
+    int total = 5000;
     for (size_t id = 0; id < total; id ++) {
         vector<uint8_t> seed = {0, static_cast<uint8_t>(id), 6, 244, 24, 199, 1, 25, 52, 88, 192,
                                 19, 18, 12, 89, 6, static_cast<uint8_t>(id), 18, 102, 58, 209,
