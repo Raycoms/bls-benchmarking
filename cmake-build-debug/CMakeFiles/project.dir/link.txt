@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/project.dir/test.cpp.o -o project  /usr/lib/libgmp.so bls/src/libblstmp.a _deps/relic-build/lib/librelic_s.a -lpthread /usr/local/lib/libsodium.a -lrt -lpthread -lm 

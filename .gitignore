@@ -1,6 +1,6 @@
 
 .idea/
 
-cmake-build-debug/_deps/
+cmake-build-debug/
 build/
 bls/build/
