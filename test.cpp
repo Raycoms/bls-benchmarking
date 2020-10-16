@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
     tests.push_back(100);
     tests.push_back(500);
     tests.push_back(1000);
-    tests.push_back(10000);
+    tests.push_back(5000);
 
     for (int total : tests) {
         vector<PrivateKey> vec;
