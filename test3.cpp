@@ -3,6 +3,7 @@
 #include <atomic>
 #include <cmath>
 #include <set>
+#include <test-utils.hpp>
 #include <libnet.h>
 
 using std::string;
@@ -15,10 +16,8 @@ using namespace bls;
 int main(int argc, char* argv[]) {
 
     vector<int> tests;
-    tests.reserve(6);
+    tests.reserve(4);
 
-    tests.push_back(2);
-    tests.push_back(10);
     tests.push_back(100);
     tests.push_back(500);
     tests.push_back(1000);
@@ -46,45 +45,18 @@ int main(int argc, char* argv[]) {
         pubVec.reserve(total);
 
         for (const PrivateKey &key : vec) {
-            sigVec.emplace_back(PopSchemeMPL::Sign(key, msg));
+            sigVec.emplace_back(AugSchemeMPL::Sign(key, msg));
             pubVec.emplace_back(key.GetG1Element());
         }
 
+        vector<G2Element> popVec;
+        popVec.reserve(total);
+
         struct timeval timeStart,
                 timeEnd;
-
-        /*vector<G2Element> popVec;
-        popVec.reserve(total);
         gettimeofday(&timeStart, NULL);
 
-        for (const PrivateKey &key : vec) {
-            popVec.push_back(PopSchemeMPL::PopProve(key));
-        }
-
-        gettimeofday(&timeEnd, NULL);
-
-        std::cout << "Pop Prove: "
-                  << ((timeEnd.tv_sec - timeStart.tv_sec) * 1000000 + timeEnd.tv_usec - timeStart.tv_usec)
-                  << " us to execute."
-                  << std::endl;
-
-        gettimeofday(&timeStart, NULL);
-
-        for (int i = 0; i < popVec.size(); i++) {
-            PopSchemeMPL::PopVerify(pubVec[i], popVec[i]);
-
-        }
-        gettimeofday(&timeEnd, NULL);
-
-        std::cout << "Pop verify: "
-                  << ((timeEnd.tv_sec - timeStart.tv_sec) * 1000000 + timeEnd.tv_usec - timeStart.tv_usec)
-                  << " us to execute."
-                  << std::endl;
-        */
-
-        gettimeofday(&timeStart, NULL);
-
-        bls::G2Element sig = PopSchemeMPL::Aggregate(sigVec);
+        bls::G2Element sig = AugSchemeMPL::Aggregate(sigVec);
 
         gettimeofday(&timeEnd, NULL);
 
@@ -95,7 +67,11 @@ int main(int argc, char* argv[]) {
 
         gettimeofday(&timeStart, NULL);
 
-        bls::G1Element pub = PopSchemeMPL::Aggregate(pubVec);
+        bls::G1Element pub = pubVec[0];
+        // New way of aggregating
+        for (int i = 1; i < pubVec.size(); i++) {
+            pub = pub + pubVec[i];
+        }
 
         gettimeofday(&timeEnd, NULL);
 
@@ -106,9 +82,15 @@ int main(int argc, char* argv[]) {
 
         gettimeofday(&timeStart, NULL);
 
-        cout << PopSchemeMPL::Verify(pub, msg, sig) << endl;
+        cout << AugSchemeMPL::Verify(pub, msg, sig) << endl;
 
         gettimeofday(&timeEnd, NULL);
+
+        vector<vector<uint8_t>> msgs;
+
+        for (int i = 0; i < pubVec.size(); i++) {
+            msgs.push_back(msg);
+        }
 
         std::cout << "Agg Verify "
                   << ((timeEnd.tv_sec - timeStart.tv_sec) * 1000000 + timeEnd.tv_usec - timeStart.tv_usec)
@@ -117,13 +99,14 @@ int main(int argc, char* argv[]) {
 
         gettimeofday(&timeStart, NULL);
 
-        PopSchemeMPL::FastAggregateVerify(pubVec, msg, sig);
+        bool ok = AugSchemeMPL::AggregateVerify(pubVec, msgs, sig);
 
         gettimeofday(&timeEnd, NULL);
 
         std::cout << "Fast Agg Verify: "
                   << ((timeEnd.tv_sec - timeStart.tv_sec) * 1000000 + timeEnd.tv_usec - timeStart.tv_usec)
-                  << " us to execute."
+                  << " us to execute. "
+                  << ok
                   << std::endl;
 
         std::cout << "----------------------------" << std::endl;

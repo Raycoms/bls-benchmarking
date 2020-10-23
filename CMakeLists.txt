@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
-set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 14)
 
 IF(NOT CMAKE_BUILD_TYPE)
     SET(CMAKE_BUILD_TYPE "RELEASE")
@@ -98,9 +98,7 @@ target_include_directories(${PROJECT_NAME}  PUBLIC  ${relic_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME}  PUBLIC  ${GMP_INCLUDES})
 target_include_directories(${PROJECT_NAME}  PUBLIC  ${CMAKE_CURRENT_SOURCE_DIR}/bls/contrib/catch)
 target_include_directories(${PROJECT_NAME}  PUBLIC  ${INCLUDE_DIRECTORIES})
-# target_link_directories(${PROJECT_NAME}  PUBLIC ${relic_SOURCE_DIR}/lib)
 
 target_include_directories(${PROJECT_NAME}  PUBLIC bls/src)
-# target_link_directories(${PROJECT_NAME}  PUBLIC bls/build/src)
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} PRIVATE ${GMP_LIBRARIES} ${GMPXX_LIBRARIES} blstmp relic_s pthread sodium)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} PRIVATE ${GMP_LIBRARIES} ${GMPXX_LIBRARIES} blstmp relic_s pthread gcrypt sodium)
