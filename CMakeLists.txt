@@ -81,7 +81,7 @@ include(FetchContent)
 FetchContent_Declare(
         relic
         GIT_REPOSITORY https://github.com/relic-toolkit/relic.git
-        GIT_TAG        origin/master
+        GIT_TAG        ed485dccb23f9f5615eac5c71b3e37bd1bc8fb3e
 )
 FetchContent_MakeAvailable(relic)
 
@@ -96,7 +96,7 @@ include_directories(
 target_include_directories(${PROJECT_NAME}  PUBLIC  ${relic_BINARY_DIR}/include)
 target_include_directories(${PROJECT_NAME}  PUBLIC  ${relic_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME}  PUBLIC  ${GMP_INCLUDES})
-target_include_directories(${PROJECT_NAME}  PUBLIC  ${CMAKE_CURRENT_SOURCE_DIR}/bls/contrib/catch)
+target_include_directories(${PROJECT_NAME}  PUBLIC  ${CMAKE_CURRENT_SOURCE_DIR}/../bls/contrib/catch)
 target_include_directories(${PROJECT_NAME}  PUBLIC  ${INCLUDE_DIRECTORIES})
 
 target_include_directories(${PROJECT_NAME}  PUBLIC bls/src)
